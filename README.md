@@ -1,2 +1,2 @@
-# Earthquake-Vizualization
-BCS Project 2 - Earthquake Vizualization
+# Earthquake-Visualization
+BCS Project 2 - Earthquake Visualization
