@@ -1,0 +1,9 @@
+1. Tell a Story with Data
+2. Project Requirements
+3. Project Description
+4a. Python Flask–powered RESTful API
+4b. HTML/CSS
+4c. JavaScript
+4d. SQLite
+5a. D3.js project
+5b. 
