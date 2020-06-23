@@ -65,6 +65,9 @@ db.sqlite3-journal
 instance/
 .webassets-cache
 
+#MapBox API_KEY config file:
+conf-api-key
+
 # Scrapy stuff:
 .scrapy
 
