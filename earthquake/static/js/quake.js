@@ -45,9 +45,9 @@ svg.call(d3.drag()
 d3.queue()
   // removed the old version of world map topojson file and added the new version
   // .defer(d3.json, "/earthquake/static/data/world-110m.json")
-  .defer(d3.json, "/earthquake/static/data/countries-110m.json")
+  .defer(d3.json, "static/data/countries-110m.json")
   // The earthquake Geojson data file to be plotted on the globe
-  .defer(d3.json, "/earthquake/static/data/earthquake.geojson")
+  .defer(d3.json, "static/data/earthquake.geojson")
   .await(ready);
 
 function ready(error, world, places) {
