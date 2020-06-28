@@ -8,3 +8,69 @@ body,
 html {
   height: 100%;
 }
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%; /* Set the fixed height of the footer here */
+  height: 10px;
+  padding-top: 10px;
+  padding-bottom: 40px;
+  text-align: center;
+  background-color: #414141;
+  color: rgb(112, 168, 214);
+}
+
+#footer p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.land {
+  fill: white;
+  opacity: 0.5;
+  stroke: #4f2291;
+  stroke-opacity: 1;
+}
+
+.countries path {
+  stroke: #4f2291;
+  stroke-linejoin: round;
+  stroke-width: 0.5;
+  fill: #4f2291;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.lines path {
+  fill: none;
+  stroke: #4f2291;
+  stroke-opacity: 0.3;
+  stroke-dasharray: 5, 5;
+}
+
+circle {
+  stroke: #4f2291;
+}
+
+.graticule {
+  fill: none;
+  stroke: #4f2291;
+  stroke-width: 0.5;
+  opacity: 0.2;
+}
+
+.labels {
+  font: 8px sans-serif;
+  fill: black;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.noclicks {
+  pointer-events: none;
+}
+
+.point {
+  opacity: 0.6;
+}
