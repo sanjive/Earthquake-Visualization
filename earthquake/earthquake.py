@@ -9,14 +9,39 @@ import os
 import numpy as np
 # Import pandas library
 import pandas as pd
+
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
 # Import the method used for connecting to DBs
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 # Allow us to declare column types
 from sqlalchemy import Column, Integer, String, Float
 # Import the methods needed to abstract classes into tables
 from sqlalchemy.ext.declarative import declarative_base
 # Import Session to bind to the DB
 from sqlalchemy.orm import Session
+
+from flask import Flask, render_template, jsonify
+
+#################################################
+# Flask Setup
+#################################################
+app = Flask(__name__)
+
+#################################################
+# Flask Routes
+#################################################
+
+@app.route('/')
+def home():
+  return render_template(
+    # name of template
+    "index.html"
+  )
+
+@app.route('/hello/<name>')
+def hello_name(name):
+    return 'Hello ' + name + '!'
 
 # The below code is used to find the cwd and change it as required
 # OS command to get the cwd and change the cwd
@@ -27,6 +52,7 @@ from sqlalchemy.orm import Session
 # os.chdir("C:\\Users\\sanji\\Documents\\project\\p2-earthquake-visualization\\earthquake")
 # Verify the cwd after the change
 # os.getcwd()
+
 
 # 2. Processing of the data file
 # ----------------------------------
@@ -156,3 +182,7 @@ with conn as con:
         print(row)
 # Close the connection when done querying
 con.close()
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
