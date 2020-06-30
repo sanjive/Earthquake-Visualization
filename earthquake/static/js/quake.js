@@ -77,6 +77,15 @@ function ready(error, world, places) {
     .attr("class", "point")
     .attr("d", path);
 
+  // Define function that will retrieve earthquake table:
+
+    var jsonFile = "static/data/earthquake.geojson"
+    d3.json(jsonFile, function(data) {
+      features = data.features
+      console.log(features)
+    })
+  
+
   // Commented out this section as it is not relevant to the project
   // Append dotted lines that will connect
   // svg.append("g").attr("class","lines")
@@ -86,39 +95,43 @@ function ready(error, world, places) {
   // 		.attr("id", d => stripWhitespace(d.properties.name))
   //     .attr("d", d => lineToLondon(d));
 
-  svg.append("g").attr("class", "labels")
-    .selectAll("text").data(places.features)
-    .enter().append("text")
-    .attr("class", "label")
-    .text(d => d.properties.name)
-    .on("mouseover", (d) => {
-      var distance = Math.round(d3.geoDistance(d.geometry.coordinates, london) * 6371);
-      d3.select("g.info").select("text.distance").text("Distance from London: ~" + distance + "km");
-      var name = stripWhitespace(d.properties.name);
-      d3.select("g.lines").select("#" + name).style("stroke-opacity", 1);
-    })
-    .on("mouseout", (d) => {
-      var name = stripWhitespace(d.properties.name);
-      d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3);
-      d3.select("g.info").select("text.distance").text("Distance from London: Hover Over A Location");
-    });
+  // Commented out this section as it is not relevant to the project
+  // Append text that describes a particular location's distance from London upon mouseover:
+  // svg.append("g").attr("class", "labels")
+  //   .selectAll("text").data(places.features)
+  //   .enter().append("text")
+  //   .attr("class", "label")
+  //   .text(d => d.properties.name)
+  //   .on("mouseover", (d) => {
+  //     var distance = Math.round(d3.geoDistance(d.geometry.coordinates, london) * 6371);
+  //     d3.select("g.info").select("text.distance").text("Distance from London: ~" + distance + "km");
+  //     var name = stripWhitespace(d.properties.name);
+  //     d3.select("g.lines").select("#" + name).style("stroke-opacity", 1);
+  //   })
+  //   .on("mouseout", (d) => {
+  //     var name = stripWhitespace(d.properties.name);
+  //     d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3);
+  //     d3.select("g.info").select("text.distance").text("Distance from London: Hover Over A Location");
+  //   });
 
-  svg.append("g").attr("class", "countries")
-    .selectAll("path")
-    .data(topojson.object(world, world.objects.countries).geometries)
-    .enter().append("path")
-    .attr("d", path);
+  // svg.append("g").attr("class", "countries")
+  //   .selectAll("path")
+  //   .data(topojson.object(world, world.objects.countries).geometries)
+  //   .enter().append("path")
+  //   .attr("d", path);
 
-  position_labels();
+  // position_labels();
 
-  svg.append("g").attr("class", "info")
-    .append("text")
-    .attr("class", "distance")
-    .attr("x", width / 20)
-    .attr("y", height * 0.9)
-    .attr("text-anchor", "start")
-    .style("font-size", "12px")
-    .text("Info: Hover Over A Location");
+  // Commented out this section as it is not relevant to the project
+  // Append text "Info: Hover Over A Location":
+  // svg.append("g").attr("class", "info")
+  //   .append("text")
+  //   .attr("class", "distance")
+  //   .attr("x", width / 20)
+  //   .attr("y", height * 0.9)
+  //   .attr("text-anchor", "start")
+  //   .style("font-size", "12px")
+  //   .text("Info: Hover Over A Location");
 
   refresh();
 
@@ -160,6 +173,7 @@ function refresh() {
 
 var timer;
 
+// Globe rotation:
 function spin() {
   timer = d3.timer(function () {
     var dt = Date.now() - time;
