@@ -21,6 +21,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # Import Session to bind to the DB
 from sqlalchemy.orm import Session
 
+
 from flask import Flask, render_template, jsonify
 
 #################################################
