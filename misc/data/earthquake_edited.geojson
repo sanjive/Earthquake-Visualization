@@ -1,0 +1,93 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.5, 31.1] },
+      "properties": {
+        "id": "1",
+        "name": "JORDAN:  BAB-A-DARAA,AL-KARAK",
+        "year": "-2150",
+        "magnitude": "7.3",
+        "country": "JORDAN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [58.2, 38] },
+      "properties": {
+        "id": "3",
+        "name": "TURKMENISTAN:  W",
+        "year": "-2000",
+        "magnitude": "7.1",
+        "country": "TURKMENISTAN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.8, 35.683] },
+      "properties": {
+        "id": "2",
+        "name": "SYRIA:  UGARIT",
+        "year": "-2000",
+        "magnitude": "",
+        "country": "SYRIA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.4, 36.4] },
+      "properties": {
+        "id": "5877",
+        "name": "GREECE:  THERA ISLAND (SANTORINI)",
+        "year": "-1610",
+        "magnitude": "",
+        "country": "GREECE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.3, 31.5] },
+      "properties": {
+        "id": "8",
+        "name": "ISRAEL:  ARIHA (JERICHO)",
+        "year": "-1566",
+        "magnitude": "",
+        "country": "ISRAEL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.5, 35.5] },
+      "properties": {
+        "id": "11",
+        "name": "ITALY:  LACUS CIMINI",
+        "year": "-1450",
+        "magnitude": "",
+        "country": "ITALY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.8, 35.683] },
+      "properties": {
+        "id": "9712",
+        "name": "SYRIAN COASTS",
+        "year": "-1365",
+        "magnitude": "",
+        "country": "SYRIA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.5, 32] },
+      "properties": {
+        "id": "12",
+        "name": "ISRAEL:  ARIHA (JERICHO)",
+        "year": "-1250",
+        "magnitude": "6.5",
+        "country": "ISRAEL"
+      }
+    }
+  ]
+}
