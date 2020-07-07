@@ -40,14 +40,14 @@ svg.call(d3.drag()
   .on("start", dragstarted)
   .on("drag", dragged));
 
-// Import world-110m.json, which contains map data (countries and continents). Also import earthquake.json, which consists of our earthquake dataset:
+// Import world-110m.json, which contains map data (countries and continents). Also import test-earthquake.json, which consists of our testing dataset:
 // queue()
 d3.queue()
   // removed the old version of world map topojson file and added the new version
   // .defer(d3.json, "/earthquake/static/data/world-110m.json")
   .defer(d3.json, "static/data/countries-110m.json")
   // The earthquake Geojson data file to be plotted on the globe
-  .defer(d3.json, "static/data/earthquake.geojson")
+  .defer(d3.json, "static/data/quake_cleaned.geojson")
   .await(ready);
 
 function ready(error, world, places) {
@@ -70,12 +70,40 @@ function ready(error, world, places) {
     .attr("class", "graticule noclicks")
     .attr("d", path);
 
-  // Append globe to svg element:
+  // OLD CODE:
+  // Append city locations to globe:
   svg.append("g").attr("class", "points")
     .selectAll("text").data(places.features)
     .enter().append("path")
     .attr("class", "point")
     .attr("d", path);
+
+  // NEW CODE:
+  // Append earthquake locations to globe and add mouseover event that displays earthquake info:
+  svg.append("g").attr("class", "points")
+    .selectAll("text").data(places.features)
+    .enter().append("path")
+    .attr("class", "point")
+    .attr("d", path)
+    .on("mouseover", function (d) {
+      var loc = d.properties.name;
+      var ctry = d.properties.country;
+      var mag = d.properties.magnitude;
+      var reg = d.properties.region;
+      var display_str = "Location: " + loc + " | Country: " + ctry + " | Region:" + reg + " | Magnitude:" + mag;
+      d3.select("g.info")
+        .select("text.distance")
+        .html(display_str)
+        // .text("Location: " + location + "Country: " + country)
+        // Not working for some reason? How do we display multiple lines of text?
+        ;
+    })
+    .on("mouseout", function (d) {
+      var name = stripWhitespace(d.properties.name);
+      //
+      d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3);
+      d3.select("g.info").select("text.distance").text("Info: Hover Over A Location");
+    });
 
   // Commented out this section as it is not relevant to the project
   // Append dotted lines that will connect
@@ -86,22 +114,23 @@ function ready(error, world, places) {
   // 		.attr("id", d => stripWhitespace(d.properties.name))
   //     .attr("d", d => lineToLondon(d));
 
-  svg.append("g").attr("class", "labels")
-    .selectAll("text").data(places.features)
-    .enter().append("text")
-    .attr("class", "label")
-    .text(d => d.properties.name)
-    .on("mouseover", (d) => {
-      var distance = Math.round(d3.geoDistance(d.geometry.coordinates, london) * 6371);
-      d3.select("g.info").select("text.distance").text("Distance from London: ~" + distance + "km");
-      var name = stripWhitespace(d.properties.name);
-      d3.select("g.lines").select("#" + name).style("stroke-opacity", 1);
-    })
-    .on("mouseout", (d) => {
-      var name = stripWhitespace(d.properties.name);
-      d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3);
-      d3.select("g.info").select("text.distance").text("Distance from London: Hover Over A Location");
-    });
+  // Commenting this section out, since it is not relevant to our project:
+  // svg.append("g").attr("class", "labels")
+  //   .selectAll("text").data(places.features)
+  //   .enter().append("text")
+  //   .attr("class", "label")
+  //   .text(d => d.properties.name)
+  //   .on("mouseover", (d) => {
+  //     var distance = Math.round(d3.geoDistance(d.geometry.coordinates, london) * 6371);
+  //     d3.select("g.info").select("text.distance").text("Distance from London: ~" + distance + "km");
+  //     var name = stripWhitespace(d.properties.name);
+  //     d3.select("g.lines").select("#" + name).style("stroke-opacity", 1);
+  //   })
+  //   .on("mouseout", (d) => {
+  //     var name = stripWhitespace(d.properties.name);
+  //     d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3);
+  //     d3.select("g.info").select("text.distance").text("Distance from London: Hover Over A Location");
+  //   });
 
   svg.append("g").attr("class", "countries")
     .selectAll("path")
@@ -115,7 +144,7 @@ function ready(error, world, places) {
     .append("text")
     .attr("class", "distance")
     .attr("x", width / 20)
-    .attr("y", height * 0.9)
+    .attr("y", height * 1)
     .attr("text-anchor", "start")
     .style("font-size", "12px")
     .text("Info: Hover Over A Location");
