@@ -47,7 +47,7 @@ d3.queue()
   // .defer(d3.json, "/earthquake/static/data/world-110m.json")
   .defer(d3.json, "static/data/countries-110m.json")
   // The earthquake Geojson data file to be plotted on the globe
-  .defer(d3.json, "static/data/test-earthquake.geojson")
+  .defer(d3.json, "static/data/quake_cleaned.geojson")
   .await(ready);
 
 function ready(error, world, places) {
@@ -78,25 +78,29 @@ function ready(error, world, places) {
     .attr("class", "point")
     .attr("d", path);
 
-// NEW CODE:
-// Append earthquake locations to globe and add mouseover event that displays earthquake info:
+  // NEW CODE:
+  // Append earthquake locations to globe and add mouseover event that displays earthquake info:
   svg.append("g").attr("class", "points")
     .selectAll("text").data(places.features)
     .enter().append("path")
     .attr("class", "point")
     .attr("d", path)
-    .on("mouseover", function(d) {
-      var location = d.properties.LOCATION_NAME
-      var region = d.properties.REGION 
-      var intensity = d.properties.INTENSITY 
+    .on("mouseover", function (d) {
+      var loc = d.properties.name;
+      var ctry = d.properties.country;
+      var mag = d.properties.magnitude;
+      var reg = d.properties.region;
+      var display_str = "Location: " + loc + " | Country: " + ctry + " | Region:" + reg + " | Magnitude:" + mag;
       d3.select("g.info")
         .select("text.distance")
-        .text("Location: " + location)
+        .html(display_str)
+        // .text("Location: " + location + "Country: " + country)
         // Not working for some reason? How do we display multiple lines of text?
-        // .text("Location: " + location + " Region: " + region)
+        ;
     })
-    .on("mouseout", function(d) {
+    .on("mouseout", function (d) {
       var name = stripWhitespace(d.properties.name);
+      //
       d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3);
       d3.select("g.info").select("text.distance").text("Info: Hover Over A Location");
     });
@@ -140,7 +144,7 @@ function ready(error, world, places) {
     .append("text")
     .attr("class", "distance")
     .attr("x", width / 20)
-    .attr("y", height * 0.9)
+    .attr("y", height * 1)
     .attr("text-anchor", "start")
     .style("font-size", "12px")
     .text("Info: Hover Over A Location");

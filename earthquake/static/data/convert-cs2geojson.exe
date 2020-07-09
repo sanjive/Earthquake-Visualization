@@ -1,0 +1,1 @@
+csv2geojson --lat latitude --lon longitude --numeric-fields year,magnitude,tsunami quake_cleaned.csv > quake_cleaned.geojson
