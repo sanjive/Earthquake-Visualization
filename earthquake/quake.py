@@ -15,7 +15,11 @@ data_file = "static/data/quake_cleaned.geojson"
 app = Flask(__name__)
 
 # Create connection variable to localhost on port 27017
-conn = "mongodb://localhost:27017"
+# conn = "mongodb://localhost:27017"
+# Use the below connection to connect to the MongoDB in the cloud
+# client = pymongo.MongoClient("mongodb+srv://sanmongo:<password>@cluster0.8nfps.mongodb.net/<dbname>?retryWrites=true&w=majority")
+# db = client.test ()
+conn = "mongodb+srv://sanmongo:M0ng0DB%21%40@cluster0.8nfps.mongodb.net/test?retryWrites=true&w=majority"
 
 #################################################
 # Flask Routes
@@ -33,6 +37,7 @@ def hello_name(name):
     return 'Hello ' + name + '!'
 # Use connection to create a mongo client instance.
 client = pymongo.MongoClient(conn)
+
 
 # The below code is used to find the cwd and change it as required
 # OS command to get the cwd and change the cwd
